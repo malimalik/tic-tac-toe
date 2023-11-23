@@ -1,9 +1,6 @@
 import React, { Fragment, useState } from "react";
 const PlayerInfo = (props) => {
-  const [playerData, setPlayerData] = useState({
-    playerName: props.initialName,
-    playerSymbol: props.symbol,
-  });
+
 
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -12,7 +9,7 @@ const PlayerInfo = (props) => {
   };
 
   const handleChange = (e) => {
-    setPlayerData((prevData) => {
+    props.onPlayerNameChange((prevData) => {
       return {
         ...prevData,
         [e.target.name]: e.target.value,
@@ -24,20 +21,20 @@ const PlayerInfo = (props) => {
   return (
     <Fragment>
       <li>
-        {!isEditMode && <span className="player-name">{playerData.playerName}</span>}
+        {!isEditMode && <span className="player-name">{props.playerName}</span>}
         {isEditMode && (
           <input
             className="player"
             type="text"
             id="player-name"
             name="playerName"
-            value={playerData.playerName}
+            value={props.playerName}
             onChange={handleChange}
             required
           />
         )}
 
-        <span className="player-symbol">{props.symbol}</span>
+        <span className="player-symbol">{props.playerSymbol}</span>
 
         <span className="players"></span>
 
