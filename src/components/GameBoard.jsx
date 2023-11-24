@@ -8,7 +8,6 @@ const initialBoard = [
 
 const GameBoard = (props) => {
   const [gameBoard, setGameBoard] = useState(initialBoard);
-  const [moves, setGameMoves] = useState([]);
 
   const updateGameBoard = (row, col) => {
     setGameBoard((prevState) => {
@@ -17,7 +16,7 @@ const GameBoard = (props) => {
       const updatedBoard = prevState.map((innerArray, rIdx) =>
         innerArray.map((cell, cIdx) => {
           if (rIdx === row && cIdx === col) {
-            return props.activePlayerSymbol; // Use the current player's symbol
+            return props.activePlayerSymbol;
           }
           return cell;
         })
@@ -26,10 +25,10 @@ const GameBoard = (props) => {
       return updatedBoard;
     });
 
-    // Toggle the current player after updating the board
     props.handleSelectSquare();
     props.recordPlayerMove({ row, col });
   };
+
 
   return (
     <Fragment>
@@ -41,7 +40,10 @@ const GameBoard = (props) => {
               <ol>
                 {row.map((playerSymbol, colIndex) => (
                   <li key={`${rowIndex}-${colIndex}`}>
-                    <button onClick={() => updateGameBoard(rowIndex, colIndex)}>
+                    <button
+                      onClick={() => updateGameBoard(rowIndex, colIndex)}
+                      disabled={!!gameBoard[rowIndex] [colIndex]}
+                    >
                       {playerSymbol}
                     </button>
                   </li>

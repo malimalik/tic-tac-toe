@@ -6,8 +6,6 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState("X");
   const [playerMoves, setPlayerMove] = useState([]);
 
-  // to record each player's move, we need the coordinates and the symbol of the player
-
   const recordPlayerMove = (coordinates) => {
     setPlayerMove((prevMoves) => [
       ...prevMoves,
