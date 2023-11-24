@@ -28,6 +28,7 @@ const GameBoard = (props) => {
 
     // Toggle the current player after updating the board
     props.handleSelectSquare();
+    props.recordPlayerMove({ row, col });
   };
 
   return (
