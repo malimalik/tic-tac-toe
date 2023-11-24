@@ -8,19 +8,16 @@ const initialBoard = [
 
 const GameBoard = (props) => {
   const [gameBoard, setGameBoard] = useState(initialBoard);
-  const [currentPlayer, setCurrentPlayer] = useState("X");
   const [moves, setGameMoves] = useState([]);
 
   const updateGameBoard = (row, col) => {
     setGameBoard((prevState) => {
-      // Prevent updating an already filled cell
       if (prevState[row][col]) return prevState;
 
-      // Create a new board with the updated cell
       const updatedBoard = prevState.map((innerArray, rIdx) =>
         innerArray.map((cell, cIdx) => {
           if (rIdx === row && cIdx === col) {
-            return currentPlayer; // Use the current player's symbol
+            return props.activePlayerSymbol; // Use the current player's symbol
           }
           return cell;
         })
@@ -30,12 +27,12 @@ const GameBoard = (props) => {
     });
 
     // Toggle the current player after updating the board
-    setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+    props.handleSelectSquare();
   };
 
   return (
     <Fragment>
-      <h2>Player {currentPlayer}'s turn</h2>
+      <h2>Player {props.activePlayerSymbol}'s turn</h2>
       <div id="game-board">
         <ol>
           {gameBoard.map((row, rowIndex) => (
@@ -52,7 +49,6 @@ const GameBoard = (props) => {
             </li>
           ))}
         </ol>
-        <div>{currentPlayer}</div>
       </div>
     </Fragment>
   );

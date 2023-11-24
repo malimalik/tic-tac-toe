@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from "react";
 const PlayerInfo = (props) => {
-
-
   const [isEditMode, setIsEditMode] = useState(false);
 
   const toggleEditing = () => {
@@ -17,10 +15,9 @@ const PlayerInfo = (props) => {
     });
   };
 
-
   return (
     <Fragment>
-      <li>
+      <li className={props.isActive ? "active" : undefined}>
         {!isEditMode && <span className="player-name">{props.playerName}</span>}
         {isEditMode && (
           <input
