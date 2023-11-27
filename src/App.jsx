@@ -26,8 +26,14 @@ function App() {
   });
 
   const handleSelectSquare = () => {
+    
     setCurrentPlayer((prevPlayer) => (prevPlayer === "X" ? "O" : "X"));
   };
+
+  const winner =
+    currentPlayer === "X"
+      ? player1Data.playerName
+      : player2Data.playerName;
 
   return (
     <main>
@@ -50,6 +56,7 @@ function App() {
           handleSelectSquare={handleSelectSquare}
           activePlayerSymbol={currentPlayer}
           recordPlayerMove={recordPlayerMove}
+          winner={winner}
         />
       </div>
       <Log playerMoves={playerMoves}></Log>
